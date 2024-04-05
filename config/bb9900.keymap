@@ -1,8 +1,9 @@
- /*
+/*
  * Copyright (c) 2023 ZitaoTech
- * "BlueBerry" Android Layout by Drexel Macintosh  
+ *
  * SPDX-License-Identifier: MIT
  */
+  
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
@@ -10,22 +11,10 @@
 #include <dt-bindings/zmk/mouse.h>
 #include <dt-bindings/zmk/backlight.h>
 #include <dt-bindings/zmk/ext_power.h>
- 
+
+
 #define SYM 1
 #define UPPER 2
-#define MEDIA 3
-
-// Standard Behavior Configuration:
-&mt {
-    flavor = "tap-preferred";
-    tapping-term-ms = <400>;
-};
-&sk{
-    release-after-ms = <2500>;
-};
-&sl {
-    release-after-ms = <2500>;
-};
 
 / {
     behaviors {
@@ -37,64 +26,11 @@
         };
     };
     behaviors {
-        ALT: tap_dance_1 {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <400>;
-            bindings = <&sl SYM>, <&to SYM>;
-        };
-    };
-    behaviors {
-        SHFT: tap_dance_2 {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <500>;
-            bindings = <&sk LSHFT>, <&kp CLCK>;
-        };
-    };
-    behaviors {
-        MED: tap_dance_3 {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <500>;
-            bindings = <&sl MEDIA>, <&to MEDIA>;
-        };
-    };
-    behaviors {
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <500>;
             bindings = <&out &kp>;
-        };
-    };
-  behaviors {
-    tap: tap {
-      compatible = "zmk,behavior-macro-one-param";
-      #binding-cells = <1>;
-      // By default, macros will tap each behavior in the bindings list,
-      // so this will tap "&kp <param1>".
-      bindings = <&macro_param_1to1 &kp MACRO_PLACEHOLDER>;
-    };
-    
-    mtt: mod_tap_tap {
-      compatible = "zmk,behavior-hold-tap";
-      #binding-cells = <2>;
-      flavor = "tap-preferred";
-      tapping-term-ms = <200>;
-      quick-tap-ms = <125>;
-      require-prior-idle-ms = <125>;
-      bindings = <&tap>, <&tap>;
-    };
-  };
-    behaviors {
-	alt_to: behavior_alt_to {
-            compatible = "zmk,behavior-hold-tap";
-            label = "alt_to";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <300>;
-            bindings = <&kp>, <&to>;
         };
     };
 
@@ -118,7 +54,7 @@
     &kp Q        &kp W      &kp E       &kp R     &kp T         &kp Y             &kp U            &kp I            &kp O            &kp P
     &kp A        &kp S      &kp D       &kp F     &kp G         &kp H             &kp J            &kp K            &kp L            &kp BSPC
     &kp LCTRL    &kp Z      &kp X       &kp C     &kp V         &kp B             &kp N            &kp M            &kp SEMI         &kp ENTER
-    &kp LSHFT               &kp LALT                            &kp SPACE                          &mtt SYM                          &mtt UPPER
+    &kp LSHFT               &kp LALT                            &kp SPACE                          &hm SYM                          &hm UPPER
             >;
         };
 
