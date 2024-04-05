@@ -24,6 +24,12 @@
             tapping-term-ms = <400>;
             bindings = <&mkp LCLK>, <&bt BT_CLR>;
         };
+        tdl: tap_dance_layer {
+          compatible = "zmk,behavior-tap-dance";
+          #binding-cells = <0>;
+          tapping-term-ms = <400>;
+          bindings = <&sl SYM>, <&tog SYM>;
+};
     };
     behaviors {
         hm: homerow_mods {
