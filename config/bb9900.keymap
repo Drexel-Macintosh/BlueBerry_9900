@@ -5,26 +5,23 @@
  *
  * SPDX-License-Identifier: MIT
  */
-  
-#include <behaviors.dtsi>
-#include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/outputs.h>
+
 #include <dt-bindings/zmk/mouse.h>
+#include <behaviors.dtsi>
 #include <dt-bindings/zmk/backlight.h>
+#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/ext_power.h>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/outputs.h>
 
 #define DEFAULT 0
 #define ALT 1
 #define SYM 2
 #define UPPER 3
 
-&sk {
-    release-after-ms = <2000>;
-};
-&sl {
-    release-after-ms = <2000>;
-};
+&sk { release-after-ms = <2000>; };
+
+&sl { release-after-ms = <2000>; };
 
 / {
     behaviors {
@@ -35,6 +32,7 @@
             bindings = <&mkp LCLK>, <&bt BT_CLR>;
         };
     };
+
     behaviors {
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
@@ -43,6 +41,7 @@
             bindings = <&out &kp>;
         };
     };
+
     behaviors {
         tdp: tap_dance_punctuations {
             compatible = "zmk,behavior-tap-dance";
@@ -50,6 +49,7 @@
             tapping-term-ms = <200>;
             bindings = <&kp DOT>, <&kp COMMA>, <&kp EXCL>, <&kp QMARK>;
         };
+
         skq: sticky_key_quick_release {
             compatible = "zmk,behavior-sticky-key";
             release-after-ms = <2000>;
@@ -57,6 +57,7 @@
             bindings = <&kp>;
             quick-release;
         };
+
         hts: hold_tap_shift {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -64,12 +65,14 @@
             tapping-term-ms = <200>;
             bindings = <&kp>, <&skq>;
         };
+
         tdsc: tap_dance_shft_clck {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
             bindings = <&hts CLCK LSHFT>, <&kp CLCK>;
         };
+
         htsk: hold_tap_skq_kp {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -77,12 +80,14 @@
             tapping-term-ms = <200>;
             bindings = <&skq>, <&kp>;
         };
+
         tdcs: tap_dance_clck_shft {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
             bindings = <&htsk LSHFT CLCK>, <&skq LSHFT>;
         };
+
         htl: hold_tap_layer {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -90,20 +95,24 @@
             tapping-term-ms = <200>;
             bindings = <&to>, <&msl>;
         };
+
         tdal: tap_dance_alt_layer {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
             bindings = <&htl ALT ALT>, <&to ALT>;
         };
+
         tdsl: tap_dance_sym_layer {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
             bindings = <&htl SYM SYM>, <&to SYM>;
         };
+
         // Credit: Drexel Macintosh
         // mtt expects LS(letter) letter to recreate BlackBerry's tap for lowercase and hold for uppercase behavior.
+
         mtt: mod_tap_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -114,26 +123,31 @@
             bindings = <&tap>, <&tap>;
         };
     };
+
     macros {
         msl: macro_sticky_layer {
             compatible = "zmk,behavior-macro-one-param";
             wait-ms = <0>;
             tap-ms = <0>;
             #binding-cells = <1>;
-            bindings
-                = <&macro_tap &to DEFAULT>
-                , <&macro_param_1to1>
-                , <&macro_tap &sl MACRO_PLACEHOLDER>
-                ;
+            bindings =
+                <&macro_tap>,
+                <&to DEFAULT &macro_param_1to1>,
+                <&macro_tap>,
+                <&sl MACRO_PLACEHOLDER>;
         };
+
         // Credit: Drexel Macintosh
         // tap will only send the keypress once, even if the key is held down.
         // This makes BlackBerry's hold for uppercase behavior easier to use.
+
         tap: tap {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
+
             // By default, macros will tap each behavior in the bindings list,
             // so this will tap "&kp <param1>".
+
             bindings = <&macro_param_1to1 &kp MACRO_PLACEHOLDER>;
         };
     };
@@ -142,73 +156,46 @@
         compatible = "zmk,keymap";
 
         default_layer {
-
             bindings = <
-
-        /*
-         *    KEYBOARD LAYOUT - ASCII by KyleBing
-         *
-                              ---------------------                                                                -------------------------
-                             |    Shoulder Key1    |                                                              |      Shoulder Key2      |
-                 ---------------------------------------------------------------------------------------------------------------------------------------------------
-                |        Call key        |   Blackberry Key    |              Trackpad            |             Back Key           |          Endcall Key           |
-                -----------------------------------------------------------------------------------------------------------------------------------------------------
-                |     Q      |     W     |     E    |     R    |         T       |       Y        |        U       |       I       |        O        |      P       |
-                -----------------------------------------------------------------------------------------------------------------------------------------------------
-                |     A      |     S     |     D    |     F    |         G       |       H        |        J       |       K       |        L        |      ←       |
-                -----------------------------------------------------------------------------------------------------------------------------------------------------
-                 \    alt    |     Z     |     X    |     C    |         V       |       B        |        N       |       M       |        $        |    Enter    /
-                   -----------------------------------------------------------------------------------------------------------------------------------------------
-                              \      aA        |       0        |                    SPACE                  |          SYM          |         aA    /
-                                -------------------------------------------------------------------------------------------------------------------
-        */
-
-                                    &mkp LCLK                                                                       &mkp RCLK
-    &sk GLOBE                       &sk LGUI                                &mkp LCLK                               &sk RALT                        &sk RCTRL
-    &kp Q           &kp W           &kp E           &kp R           &kp T           &kp Y           &kp U           &kp I           &kp O           &kp P
-    &kp A           &kp S           &kp D           &kp F           &kp G           &kp H           &kp J           &kp K           &kp L           &kp BSPC
-    &htl ALT ALT    &kp Z           &kp X           &kp C           &kp V           &kp B           &kp N           &kp M           &tdp            &kp RET
-                    &hts CLCK LSHFT &kp TAB                                 &kp SPACE                               &htl SYM SYM    &hts CLCK LSHFT
+&mkp LCLK     &mkp RCLK
+&kp TAB       &sk LGUI   &mkp LCLK        &kp ESC  &sk RCTRL
+&kp Q         &kp W      &kp E            &kp R    &kp T         &kp Y        &kp U         &kp I            &kp O  &kp P
+&kp A         &kp S      &kp D            &kp F    &kp G         &kp H        &kp J         &kp K            &kp L  &kp BSPC
+&htl ALT ALT  &kp Z      &kp X            &kp C    &kp V         &kp B        &kp N         &kp M            &tdp   &kp RET
+                         &hts CLCK LSHFT           &kp LEFT_ALT  &kp SPACE    &htl SYM SYM  &hts CLCK LSHFT
             >;
         };
-
 
         alt_layer {
-
             bindings = <
-                                    &msc SCRL_UP                                                                    &msc SCRL_DOWN
-    &kp LEFT                        &kp DOWN                                &mkp LCLK                               &kp UP                          &kp RIGHT 
-    &kp HASH        &kp N1          &kp N2          &kp N3          &kp LPAR        &kp RPAR        &kp UNDER       &kp MINUS       &kp PLUS        &kp AT
-    &kp STAR        &kp N4          &kp N5          &kp N6          &kp SLASH       &kp COLON       &kp SEMI        &kp APOS        &kp DQT         &kp BSPC
-    &to DEFAULT     &kp N7          &kp N8          &kp N9          &kp QMARK       &kp EXCL        &kp COMMA       &kp DOT         &kp DLLR        &kp RET
-                    &hts CLCK LSHFT &kp N0                                  &kp SPACE                               &htl SYM SYM    &hts CLCK LSHFT
-
+&msc SCRL_UP  &msc SCRL_DOWN
+&kp LEFT      &kp DOWN        &mkp LCLK        &kp UP  &kp RIGHT
+&kp HASH      &kp N1          &kp N2           &kp N3  &kp LPAR   &kp RPAR     &kp UNDER     &kp MINUS        &kp PLUS  &kp AT
+&kp STAR      &kp N4          &kp N5           &kp N6  &kp SLASH  &kp COLON    &kp SEMI      &kp APOS         &kp DQT   &kp BSPC
+&to DEFAULT   &kp N7          &kp N8           &kp N9  &kp QMARK  &kp EXCL     &kp COMMA     &kp DOT          &kp DLLR  &kp RET
+                              &hts CLCK LSHFT          &kp N0     &kp SPACE    &htl SYM SYM  &hts CLCK LSHFT
             >;
         };
 
-
         sym_layer {
-
             bindings = <
-                                    &kp C_VOL_DN                                                                    &kp C_VOL_UP
-    &kp ESC                         &kp C_PREV                              &kp C_PLAY_PAUSE                        &kp C_NEXT                      &kp DEL 
-    &kp TILDE       &kp GRAVE       &kp LBRC        &kp RBRC        &kp LBKT        &kp RBKT        &kp LT          &kp GT          &kp CARET       &kp PRCNT
-    &kp EQUAL       &sk LSHFT       &kp PG_UP       &kp PG_DN       &kp BSLH        &kp PIPE        &kp AMPS        &kp HOME        &kp END         &kp BSPC
-    &htl ALT ALT    &sk LCTRL       &sk LALT        &sk LGUI        &none           &kp LEFT        &kp DOWN        &kp UP          &kp RIGHT       &kp RET
-                    &hts CLCK LSHFT &sk GLOBE                               &kp SPACE                               &to DEFAULT     &to UPPER
-
+&kp C_VOL_DN  &kp C_VOL_UP
+&kp ESC       &kp C_PREV    &kp C_PLAY_PAUSE  &kp C_NEXT  &kp DEL
+&kp TILDE     &kp GRAVE     &kp LBRC          &kp RBRC    &kp LBKT   &kp RBKT     &kp LT       &kp GT     &kp CARET  &kp PRCNT
+&kp EQUAL     &sk LSHFT     &kp PG_UP         &kp PG_DN   &kp BSLH   &kp PIPE     &kp AMPS     &kp HOME   &kp END    &kp BSPC
+&htl ALT ALT  &sk LCTRL     &sk LALT          &sk LGUI    &none      &kp LEFT     &kp DOWN     &kp UP     &kp RIGHT  &kp RET
+                            &hts CLCK LSHFT               &sk GLOBE  &kp SPACE    &to DEFAULT  &to UPPER
             >;
         };
 
         upper_layer {
-
             bindings = <
-                                    &none                                                                           &none
-    &bt BT_SEL 0                    &bt BT_SEL 1                            &td0                                    &bt BT_SEL 2                    &bt BT_SEL 3
-    &none           &none           &none           &sys_reset      &ext_power EP_TOG &none         &none           &none           &none           &none
-    &none           &none           &none           &none           &none             &none         &none           &none           &none           &none
-    &to DEFAULT     &none           &none           &none           &bl BL_DEC        &bl BL_TOG    &bl BL_INC      &none           &bootloader     &none
-                    &to DEFAULT     &to DEFAULT                             &out OUT_TOG                            &to DEFAULT     &to DEFAULT
+&none         &none
+&bt BT_SEL 0  &bt BT_SEL 1  &td0         &bt BT_SEL 2  &bt BT_SEL 3
+&none         &none         &none        &sys_reset    &ext_power EP_TOG  &none           &none        &none        &none        &none
+&none         &none         &none        &none         &none              &none           &none        &none        &none        &none
+&to DEFAULT   &none         &none        &none         &bl BL_DEC         &bl BL_TOG      &bl BL_INC   &none        &bootloader  &none
+                            &to DEFAULT                &to DEFAULT        &out OUT_TOG    &to DEFAULT  &to DEFAULT
             >;
         };
     };
