@@ -168,10 +168,10 @@
             bindings = <
 &mkp LCLK          &mkp RCLK
 &htsk CAPS RSHIFT  &htsk LGUI LGUI  &mkp LCLK        &kp ESC  &sk RCTRL
-&kp Q              &kp W            &kp E            &kp R    &kp T         &kp Y        &kp U         &kp I             &kp O  &kp P
-&kp A              &kp S            &kp D            &kp F    &kp G         &kp H        &kp J         &kp K             &kp L  &kp BSPC
-&htl ALT ALT       &kp Z            &kp X            &kp C    &kp V         &kp B        &kp N         &kp M             &tdp   &kp RET
-                                    &mtt CAPS LSHFT           &kp LEFT_ALT  &kp SPACE    &htl SYM SYM  &mtt CAPS RSHIFT
+&kp Q              &kp W            &kp E            &kp R    &kp T         &kp Y        &kp U         &kp I  &kp O  &kp P
+&kp A              &kp S            &kp D            &kp F    &kp G         &kp H        &kp J         &kp K  &kp L  &kp BSPC
+&htl ALT ALT       &kp Z            &kp X            &kp C    &kp V         &kp B        &kp N         &kp M  &tdp   &kp RET
+                                    &mtt CAPS LSHFT           &kp LEFT_ALT  &kp SPACE    &htl SYM SYM  &tdcs
             >;
         };
 
