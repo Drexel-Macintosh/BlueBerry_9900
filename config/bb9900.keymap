@@ -178,7 +178,7 @@
         alt_layer {
             bindings = <
 &msc SCRL_UP       &msc SCRL_DOWN
-&htsk CAPS LSHIFT  &htsk LGUI LGUI  &mkp LCLK        &kp ESC  &to 0
+&htsk CAPS LSHIFT  &htsk LGUI LGUI  &mkp LCLK        &kp ESC  &sk RCTRL
 &kp HASH           &kp N1           &kp N2           &kp N3   &kp LPAR   &kp RPAR     &kp UNDER     &kp MINUS             &kp PLUS  &kp AT
 &kp STAR           &kp N4           &kp N5           &kp N6   &kp SLASH  &kp COLON    &kp SEMI      &kp APOS              &kp DQT   &kp BSPC
 &to DEFAULT        &kp N7           &kp N8           &kp N9   &kp QMARK  &kp EXCL     &kp COMMA     &kp DOT               &kp DLLR  &kp RET
@@ -189,11 +189,11 @@
         sym_layer {
             bindings = <
 &kp C_VOL_DN  &kp C_VOL_UP
-&kp C_PREV    &kp C_AC_SEARCH  &mkp LCLK        &kp ESC    &kp C_NEXT
-&kp TILDE     &kp GRAVE        &kp UP_ARROW     &none      &kp LBKT        &kp RBKT           &kp LT           &kp GT       &kp C_MUTE     &kp C_PLAY_PAUSE
-&kp EQUAL     &kp LEFT_ARROW   &none            &kp RIGHT  &kp BSLH        &kp PIPE           &kp PRINTSCREEN  &kp HOME     &kp END        &kp DEL
-&htl ALT ALT  &sk LCTRL        &sk DOWN_ARROW   &none      &kp LEFT_BRACE  &kp RIGHT_BRACE    &none            &kp PERCENT  &kp AMPERSAND  &kp RET
-                               &hts CLCK LSHFT             &sk GLOBE       &kp SPACE          &to DEFAULT      &to UPPER
+&kp C_PREV    &kp C_AC_SEARCH  &mkp LCLK       &kp ESC    &kp C_NEXT
+&kp TILDE     &none            &kp UP_ARROW    &none      &kp LBKT        &kp RBKT           &kp LT           &kp GT       &kp C_MUTE     &kp C_PLAY_PAUSE
+&kp EQUAL     &kp LEFT_ARROW   &none           &kp RIGHT  &kp BSLH        &kp PIPE           &kp PRINTSCREEN  &kp HOME     &kp END        &kp DEL
+&htl ALT ALT  &none            &sk DOWN_ARROW  &none      &kp LEFT_BRACE  &kp RIGHT_BRACE    &none            &kp PERCENT  &kp AMPERSAND  &kp RET
+                               &to 3                      &sk GLOBE       &kp SPACE          &to DEFAULT      &to UPPER
             >;
         };
 
